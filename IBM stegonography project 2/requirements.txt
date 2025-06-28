@@ -1,4 +1,0 @@
-flask
-pycryptodome
-numpy
-opencv-python 
