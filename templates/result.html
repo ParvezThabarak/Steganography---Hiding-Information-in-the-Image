@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Encrypted Image</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.9.4/css/bulma.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    body {
+      background: linear-gradient(120deg, #f8fafc 0%, #e0e7ff 100%);
+      min-height: 100vh;
+    }
+    .card {
+      border-radius: 18px;
+      box-shadow: 0 4px 24px rgba(99,102,241,0.10);
+      margin-top: 3rem;
+    }
+    .icon.is-large {
+      font-size: 2.5rem;
+      color: #22c55e;
+    }
+    .button.is-gradient {
+      background: linear-gradient(90deg, #6366f1 0%, #60a5fa 100%);
+      color: #fff;
+      border: none;
+    }
+    .button.is-gradient:hover {
+      background: linear-gradient(90deg, #60a5fa 0%, #6366f1 100%);
+      color: #fff;
+    }
+  </style>
+</head>
+<body>
+  <section class="section">
+    <div class="container">
+      <div class="columns is-centered">
+        <div class="column is-half">
+          <div class="card has-text-centered">
+            <div class="card-content">
+              <span class="icon is-large mb-2"><i class="fas fa-check-circle"></i></span>
+              <h1 class="title is-3">Message Embedded Successfully!</h1>
+              <p class="subtitle is-5 mb-4">Download or view your encrypted image below:</p>
+              <figure class="image is-inline-block mb-4">
+                <img src="/{{ image_url }}" alt="Encrypted Image" style="max-width: 400px; border-radius: 12px; box-shadow: 0 2px 12px rgba(99,102,241,0.10);">
+              </figure>
+              <div class="buttons is-centered">
+                <a href="/{{ image_url }}" download class="button is-gradient is-medium">
+                  <span class="icon"><i class="fas fa-download"></i></span>
+                  <span>Download Encrypted Image</span>
+                </a>
+                <a href="/" class="button is-light is-medium">
+                  <span class="icon"><i class="fas fa-arrow-left"></i></span>
+                  <span>Back to Home</span>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</body>
+</html> 
