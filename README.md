@@ -56,19 +56,20 @@ A secure web application for hiding (encrypting) and extracting secret messages 
 
 # Encrypt & Embed Form
 "User uploads an image, enters a secret message and encryption key to securely embed the message using steganography."
-![Screenshot 2025-06-26 194315](https://github.com/user-attachments/assets/49749c2f-f8d8-4a4d-a6b2-59becc1201de)
+![Screenshot 2025-06-26 194315](https://github.com/user-attachments/assets/3ee88ff1-4b30-464d-8a39-c1fec2285f21)
 
 # Successful Embedding
 "Confirmation screen after successfully embedding the secret message — the user can download the encrypted image."
-![Screenshot 2025-06-26 194355](https://github.com/user-attachments/assets/e9cea61d-3f7e-4c9c-a85e-7d1001aa84b7)
+![Screenshot 2025-06-26 194355](https://github.com/user-attachments/assets/bc3823bb-048f-480d-87f3-cc0311cfd549)
 
 # Extract & Decrypt Form
 "To retrieve the hidden message, the user uploads the encrypted image and provides the correct decryption key."
-![Screenshot 2025-06-26 194620](https://github.com/user-attachments/assets/364f44eb-73c5-4454-9cdf-59667a835291)
+![Screenshot 2025-06-26 194620](https://github.com/user-attachments/assets/5d5958f4-b23f-439d-98c6-c6168b862550)
 
 # Message Decrypted
 "The original secret message is successfully revealed after decryption — confirming secure and accurate message extraction."
-![Screenshot 2025-06-26 194457](https://github.com/user-attachments/assets/bcf8400d-1d67-42a5-a9d8-ce7b6163e5e0)
+![Uploading Screenshot 2025-06-26 194457.png…]()
+
 
 
 
