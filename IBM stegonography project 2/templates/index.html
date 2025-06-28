@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Steganography Encrypt/Decrypt | Parvez Thabarak</title>
+  <meta name="description" content="Hide and reveal secret messages in images with encryption. Made by Parvez Thabarak.">
+  <meta name="author" content="Parvez Thabarak">
+  <meta property="og:title" content="Steganography Encrypt/Decrypt | Parvez Thabarak">
+  <meta property="og:description" content="Hide and reveal secret messages in images with encryption. Made by Parvez Thabarak.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://em-content.zobj.net/source/microsoft-teams/337/spy_1f575-fe0f-200d-2642-fe0f.png">
+  <meta property="og:url" content="">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Steganography Encrypt/Decrypt | Parvez Thabarak">
+  <meta name="twitter:description" content="Hide and reveal secret messages in images with encryption. Made by Parvez Thabarak.">
+  <meta name="twitter:image" content="https://em-content.zobj.net/source/microsoft-teams/337/spy_1f575-fe0f-200d-2642-fe0f.png">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><text y='50%' x='50%' text-anchor='middle' dominant-baseline='middle' font-size='48'>🕵️‍♂️</text></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.9.4/css/bulma.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    html, body {
+      font-family: 'Inter', system-ui, sans-serif;
+      background: #f6f8fb;
+      min-height: 100vh;
+      color: #232946;
+      overflow-x: hidden;
+    }
+    .header {
+      width: 100%;
+      background: #fff;
+      box-shadow: 0 2px 8px rgba(44,62,80,0.04);
+      padding: 1.2rem 0 1.2rem 0;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+    .header .logo {
+      font-size: 2.1rem;
+      font-weight: 700;
+      color: #6c63ff;
+      letter-spacing: 0.01em;
+      display: flex;
+      align-items: center;
+      gap: 0.7em;
+    }
+    .header .logo .icon {
+      font-size: 2.2rem;
+      color: #6c63ff;
+    }
+    .typewriter {
+      display: inline-block;
+      border-right: 2.5px solid #6c63ff;
+      white-space: nowrap;
+      overflow: hidden;
+      animation: typing 2.2s steps(40, end), blink-caret 0.7s step-end infinite;
+      font-size: 2.1rem;
+      font-weight: 700;
+      color: #6c63ff;
+      letter-spacing: 0.01em;
+      margin-bottom: 0.2em;
+    }
+    @keyframes typing {
+      from { width: 0 }
+      to { width: 100% }
+    }
+    @keyframes blink-caret {
+      from, to { border-color: transparent }
+      50% { border-color: #6c63ff; }
+    }
+    .split-section {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: stretch;
+      max-width: 1100px;
+      margin: 2.5rem auto 0 auto;
+      background: #fff;
+      border-radius: 18px;
+      box-shadow: 0 4px 32px rgba(44,62,80,0.08);
+      overflow: hidden;
+      min-height: 540px;
+    }
+    .split-card {
+      flex: 1 1 0;
+      padding: 2.5rem 2.2rem 2.2rem 2.2rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      background: #fafdff;
+    }
+    .split-card.left {
+      border-right: 1.5px solid #e3e7ee;
+      background: #fafdff;
+    }
+    .split-card.right {
+      background: #f6f8fb;
+    }
+    .split-card h2 {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #6c63ff;
+      margin-bottom: 0.2em;
+    }
+    .split-card .subtitle {
+      color: #6c63ffbb;
+      font-size: 1.08rem;
+      margin-bottom: 1.2em;
+    }
+    .split-card form {
+      width: 100%;
+    }
+    .field {
+      margin-bottom: 1.1rem;
+    }
+    label.label {
+      font-weight: 600;
+      font-size: 1.08rem;
+      margin-bottom: 0.2em;
+      color: #232946;
+    }
+    .file-label, .file-cta, .file-name {
+      font-size: 1rem;
+    }
+    .file-label {
+      width: 100%;
+    }
+    .file-input:focus + .file-cta {
+      border-color: #6c63ff;
+      box-shadow: 0 0 0 2px #6c63ff44;
+    }
+    textarea.textarea {
+      min-height: 110px;
+      font-size: 1.05rem;
+      border-radius: 10px;
+      padding: 0.8em 1em;
+      resize: vertical;
+      background: #f6f8fb;
+      border: 1.5px solid #e3e7ee;
+    }
+    .input {
+      font-size: 1.05rem;
+      border-radius: 10px;
+      padding: 0.7em 1em;
+      background: #f6f8fb;
+      border: 1.5px solid #e3e7ee;
+    }
+    .button.is-material {
+      background: #6c63ff;
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      font-weight: 600;
+      font-size: 1.08rem;
+      padding: 0.8em 1.2em;
+      box-shadow: 0 2px 8px #6c63ff22;
+      transition: background 0.2s, box-shadow 0.2s, transform 0.2s;
+    }
+    .button.is-material:hover, .button.is-material:focus {
+      background: #4f46e5;
+      color: #fff;
+      box-shadow: 0 4px 16px #6c63ff33;
+      transform: translateY(-2px) scale(1.03);
+    }
+    .progress {
+      background: #e3e7ee;
+      height: 0.5rem;
+      border-radius: 6px;
+      margin-top: 0.7em;
+    }
+    .about-btn {
+      position: fixed;
+      bottom: 2.2rem;
+      right: 2.2rem;
+      z-index: 30;
+      background: #6c63ff;
+      color: #fff;
+      border-radius: 50%;
+      width: 54px;
+      height: 54px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 2px 12px #6c63ff33;
+      font-size: 1.5rem;
+      border: none;
+      transition: background 0.2s, box-shadow 0.2s, transform 0.2s;
+    }
+    .about-btn:hover, .about-btn:focus {
+      background: #4f46e5;
+      color: #fff;
+      transform: scale(1.08);
+      box-shadow: 0 4px 24px #6c63ff44;
+    }
+    .about-modal {
+      display: none;
+      position: fixed;
+      top: 0; left: 0; width: 100vw; height: 100vh;
+      background: rgba(44,62,80,0.18);
+      z-index: 1000;
+      align-items: center;
+      justify-content: center;
+    }
+    .about-modal.active {
+      display: flex;
+    }
+    .about-content {
+      background: #fff;
+      border-radius: 18px;
+      box-shadow: 0 8px 32px #6c63ff22;
+      padding: 2.5rem 2.2rem 2.2rem 2.2rem;
+      max-width: 420px;
+      width: 90vw;
+      text-align: center;
+      position: relative;
+      animation: fadeInUp 0.7s cubic-bezier(.23,1.01,.32,1) both;
+    }
+    .about-content h3 {
+      color: #6c63ff;
+      font-size: 1.3rem;
+      font-weight: 700;
+      margin-bottom: 0.7em;
+    }
+    .about-content p {
+      color: #232946;
+      font-size: 1.08rem;
+      margin-bottom: 1.2em;
+    }
+    .about-close {
+      position: absolute;
+      top: 1.1rem;
+      right: 1.1rem;
+      background: none;
+      border: none;
+      font-size: 1.3rem;
+      color: #6c63ff;
+      cursor: pointer;
+      transition: color 0.2s;
+    }
+    .about-close:hover { color: #d7263d; }
+    .footer {
+      background: none;
+      color: #6c63ff;
+      text-align: center;
+      padding: 2.5rem 0 1.2rem 0;
+      font-size: 1.1rem;
+      z-index: 2;
+      position: relative;
+    }
+    .footer .credit {
+      font-weight: 600;
+      color: #232946;
+      letter-spacing: 0.01em;
+      margin-top: 0.5em;
+      font-size: 1.08rem;
+    }
+    .notification.is-danger.is-light {
+      background: #ffeaea;
+      color: #d7263d;
+      border: 1.5px solid #ffd6d6;
+      border-radius: 8px;
+      margin-bottom: 1.5rem;
+    }
+    @media (max-width: 1023px) {
+      .split-section {
+        flex-direction: column;
+        min-height: unset;
+        margin: 1.2rem 0.5rem 0 0.5rem;
+      }
+      .split-card {
+        border-right: none !important;
+        border-bottom: 1.5px solid #e3e7ee;
+        padding: 1.5rem 0.7rem 1.2rem 0.7rem;
+      }
+      .split-card.right {
+        border-bottom: none;
+      }
+    }
+    @media (max-width: 600px) {
+      .header .logo { font-size: 1.3rem; }
+      .split-card h2 { font-size: 1.1rem; }
+      .split-card .subtitle { font-size: 0.98rem; }
+      .button.is-material { font-size: 0.98rem; }
+    }
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(40px); }
+      to { opacity: 1; transform: none; }
+    }
+  </style>
+</head>
+<body>
+  <header class="header">
+    <div class="container has-text-centered">
+      <span class="logo"><span class="icon"><i class="fas fa-user-secret" aria-hidden="true"></i></span> Steganography Web App</span>
+    </div>
+  </header>
+  <main>
+    <div class="container">
+      <div class="has-text-centered" style="margin-top:2.5rem;">
+        <span style="display:inline-flex;align-items:center;gap:1em;padding:1.1em 2.6em;background:#f3f4fa;border-radius:2.5em;font-size:1.55rem;color:#4b4f77;box-shadow:0 6px 32px #6c63ff22, 0 1.5px 8px #6c63ff11;border:2.5px solid #e3e7ee;font-weight:700;letter-spacing:0.01em;">
+          <span class="icon" style="color:#6c63ff;font-size:2.1em;"><i class="fas fa-user-secret"></i></span>
+          Hide and reveal secrets in images.
+        </span>
+      </div>
+      {% with messages = get_flashed_messages() %}
+        {% if messages %}
+          <div class="notification is-danger is-light" role="alert">
+            <span class="icon"><i class="fas fa-exclamation-triangle" aria-hidden="true"></i></span>
+            {{ messages[0] }}
+          </div>
+        {% endif %}
+      {% endwith %}
+      <section class="split-section">
+        <div class="split-card left">
+          <h2><span class="icon"><i class="fas fa-lock" aria-hidden="true"></i></span> Encrypt & Embed</h2>
+          <div class="subtitle">Hide a secret message in your image</div>
+          <form action="/encrypt" method="POST" enctype="multipart/form-data" id="encryptForm" autocomplete="off">
+            <div class="field">
+              <label class="label" for="encImageInput">Upload Image</label>
+              <div class="file has-name is-fullwidth">
+                <label class="file-label">
+                  <input class="file-input" type="file" name="image" required id="encImageInput" aria-label="Upload image for encryption">
+                  <span class="file-cta">
+                    <span class="file-icon"><i class="fas fa-image" aria-hidden="true"></i></span>
+                    <span class="file-label">Choose a file…</span>
+                  </span>
+                  <span class="file-name">PNG, JPG, JPEG</span>
+                </label>
+              </div>
+            </div>
+            <div class="field">
+              <label class="label" for="encMessage">Secret Message</label>
+              <div class="control">
+                <textarea class="textarea" name="message" id="encMessage" placeholder="Type your secret message..." required aria-label="Secret message"></textarea>
+              </div>
+            </div>
+            <div class="field">
+              <label class="label" for="encKey">Encryption Key</label>
+              <div class="control has-icons-left">
+                <input class="input" type="password" name="key" id="encKey" placeholder="Enter a strong key" required aria-label="Encryption key">
+                <span class="icon is-small is-left"><i class="fas fa-key" aria-hidden="true"></i></span>
+              </div>
+            </div>
+            <div class="field mt-4">
+              <button class="button is-material is-fullwidth is-medium" type="submit" id="encBtn">
+                <span class="icon"><i class="fas fa-shield-alt" aria-hidden="true"></i></span>
+                <span>Encrypt & Embed</span>
+              </button>
+              <progress class="progress is-info mt-2" value="0" max="100" id="encProgress" style="display:none;" aria-label="Encrypt progress"></progress>
+            </div>
+          </form>
+        </div>
+        <div class="split-card right">
+          <h2><span class="icon"><i class="fas fa-unlock" aria-hidden="true"></i></span> Extract & Decrypt</h2>
+          <div class="subtitle">Reveal a hidden message from an image</div>
+          <form action="/decrypt" method="POST" enctype="multipart/form-data" id="decryptForm" autocomplete="off">
+            <div class="field">
+              <label class="label" for="decImageInput">Upload Image</label>
+              <div class="file has-name is-fullwidth">
+                <label class="file-label">
+                  <input class="file-input" type="file" name="image" required id="decImageInput" aria-label="Upload image for decryption">
+                  <span class="file-cta">
+                    <span class="file-icon"><i class="fas fa-image" aria-hidden="true"></i></span>
+                    <span class="file-label">Choose a file…</span>
+                  </span>
+                  <span class="file-name">PNG, JPG, JPEG</span>
+                </label>
+              </div>
+            </div>
+            <div class="field">
+              <label class="label" for="decKey">Decryption Key</label>
+              <div class="control has-icons-left">
+                <input class="input" type="password" name="key" id="decKey" placeholder="Enter your key" required aria-label="Decryption key">
+                <span class="icon is-small is-left"><i class="fas fa-key" aria-hidden="true"></i></span>
+              </div>
+            </div>
+            <div class="field mt-4">
+              <button class="button is-material is-fullwidth is-medium" type="submit" id="decBtn">
+                <span class="icon"><i class="fas fa-eye" aria-hidden="true"></i></span>
+                <span>Extract & Decrypt</span>
+              </button>
+              <progress class="progress is-info mt-2" value="0" max="100" id="decProgress" style="display:none;" aria-label="Decrypt progress"></progress>
+            </div>
+          </form>
+        </div>
+      </section>
+    </div>
+  </main>
+  <button class="about-btn" id="aboutBtn" title="About this project" aria-label="About this project">
+    <i class="fas fa-info"></i>
+  </button>
+  <div class="about-modal" id="aboutModal" tabindex="-1" aria-modal="true" role="dialog">
+    <div class="about-content">
+      <button class="about-close" id="aboutClose" aria-label="Close about modal"><i class="fas fa-times"></i></button>
+      <h3>About This Project</h3>
+      <p><b>Steganography Encrypt/Decrypt</b> is a secure web app for hiding and revealing secret messages in images using encryption and steganography.<br><br>Made by <b>Parvez Thabarak</b>.</p>
+      <p style="font-size:0.98rem;color:#6c63ff;">Share this project and help others protect their secrets!</p>
+    </div>
+  </div>
+  <footer class="footer">
+    <div class="content has-text-centered">
+      <span style="font-weight:600;color:#232946;letter-spacing:0.01em;font-size:1.08rem;">
+        Made by Parvez Thabarak&nbsp;|&nbsp;Secure Steganography Web App
+      </span>
+    </div>
+  </footer>
+  <script>
+    // About modal
+    const aboutBtn = document.getElementById('aboutBtn');
+    const aboutModal = document.getElementById('aboutModal');
+    const aboutClose = document.getElementById('aboutClose');
+    aboutBtn.onclick = () => aboutModal.classList.add('active');
+    aboutClose.onclick = () => aboutModal.classList.remove('active');
+    window.onclick = (e) => { if (e.target === aboutModal) aboutModal.classList.remove('active'); };
+    // Progress bar for encrypt
+    document.getElementById('encryptForm').onsubmit = function() {
+      document.getElementById('encBtn').disabled = true;
+      document.getElementById('encProgress').style.display = 'block';
+      let prog = document.getElementById('encProgress');
+      prog.value = 0;
+      let val = 0;
+      let interval = setInterval(() => {
+        val += 10;
+        prog.value = val;
+        if (val >= 100) clearInterval(interval);
+      }, 120);
+    };
+    // Progress bar for decrypt
+    document.getElementById('decryptForm').onsubmit = function() {
+      document.getElementById('decBtn').disabled = true;
+      document.getElementById('decProgress').style.display = 'block';
+      let prog = document.getElementById('decProgress');
+      prog.value = 0;
+      let val = 0;
+      let interval = setInterval(() => {
+        val += 10;
+        prog.value = val;
+        if (val >= 100) clearInterval(interval);
+      }, 120);
+    };
+    // Show selected file name for encrypt
+    document.getElementById('encImageInput').addEventListener('change', function(e) {
+      const fileNameSpan = this.closest('.file-label').querySelector('.file-name');
+      if (this.files && this.files.length > 0) {
+        fileNameSpan.textContent = this.files[0].name;
+      } else {
+        fileNameSpan.textContent = 'PNG, JPG, JPEG';
+      }
+    });
+    // Show selected file name for decrypt
+    document.getElementById('decImageInput').addEventListener('change', function(e) {
+      const fileNameSpan = this.closest('.file-label').querySelector('.file-name');
+      if (this.files && this.files.length > 0) {
+        fileNameSpan.textContent = this.files[0].name;
+      } else {
+        fileNameSpan.textContent = 'PNG, JPG, JPEG';
+      }
+    });
+  </script>
+</body>
+</html> 
