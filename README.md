@@ -68,6 +68,7 @@ A secure web application for hiding (encrypting) and extracting secret messages 
 
 # Message Decrypted
 "The original secret message is successfully revealed after decryption — confirming secure and accurate message extraction."
+
 ![Screenshot 2025-06-26 194457](https://github.com/user-attachments/assets/cfc6b036-77e5-4df7-a479-815f627473e3)
 
 
